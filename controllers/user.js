@@ -14,6 +14,7 @@ const usuariosGet = async(req = request, res = response) => {
 
     // const total = await Usuario.countDocuments( queryState );
 
+    //* promesas lanzadas al mismo momento
     const [ usuarios, total ] = await Promise.all([
         Usuario.find( queryState )
             .skip(Number(since))
@@ -66,6 +67,7 @@ const usuariosDelete = async(req, res) => {
     // fisicamente lo borramos
     // const usuario = await Usuario.findByIdAndDelete( id );
 
+    // cambiamos el estado y no borramos en la DB
     const usuario = await Usuario.findByIdAndUpdate( id, { estado: false });
 
     res.json(usuario)
